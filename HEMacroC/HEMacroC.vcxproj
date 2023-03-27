@@ -127,6 +127,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="InputSetter.cpp" />
+    <ClCompile Include="KeyEvents.cpp" />
+    <ClCompile Include="MagicFn.cpp" />
     <ClCompile Include="OnKeyPressed.cpp" />
     <ClCompile Include="KeyHook.cpp" />
     <ClCompile Include="main.cpp" />

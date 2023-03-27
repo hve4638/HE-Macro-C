@@ -1,13 +1,19 @@
+#include <iostream>
 #include "KeyHook.h"
 
 using namespace std;
 
-void RunKeyHook();
-LRESULT CALLBACK KeyboardProc(int, WPARAM, LPARAM);
-
 static int EnableMagicFn = 0;
 
+void RunKeyHook();
 LRESULT CALLBACK KeyboardProc(int nCode, WPARAM wParam, LPARAM lParam) {
+#ifdef _DEBUG
+    if (nCode == HC_ACTION && wParam == WM_KEYDOWN) {
+        PKBDLLHOOKSTRUCT p = (PKBDLLHOOKSTRUCT)lParam;
+        cout << "INPUT: " << p->vkCode << endl;
+    }
+#endif
+
     if (nCode == HC_ACTION) {
         PKBDLLHOOKSTRUCT p = (PKBDLLHOOKSTRUCT)lParam;
 
@@ -28,7 +34,6 @@ LRESULT CALLBACK KeyboardProc(int nCode, WPARAM wParam, LPARAM lParam) {
             LRESULT result = OnKeyReleased(p);
             if (result == 1) return 1;
         }
-
     }
 
     return CallNextHookEx(NULL, nCode, wParam, lParam);

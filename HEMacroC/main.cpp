@@ -1,10 +1,19 @@
 #include "KeyHook.h"
+#define VK_PGUP 33
+#define VK_PGDOWN 34
 
 using namespace std;
 
-WORD MagicFnHotkey[256] = { 0, 0, };
-
 int main() {
+    MaginFnSetKey('Z', &EventPressWithCtrl, &EventPressWithCtrl);
+    MaginFnSetKey('X', &EventPressWithCtrl, &EventPressWithCtrl);
+    MaginFnSetKey('C', &EventPressWithCtrl, &EventPressWithCtrl);
+    MaginFnSetKey('V', &EventPressWithCtrl, &EventPressWithCtrl);
+    MaginFnSetKey('B', &EventPressWithCtrl, &EventPressWithCtrl);
+
+    MaginFnSetKey(VK_CONTROL, &EventPress, &EventRelease);
+    MaginFnSetKey(VK_SHIFT, &EventPress, &EventRelease);
+
     MagicFnHotkey['A'] = VK_LEFT;
     MagicFnHotkey['S'] = VK_DOWN;
     MagicFnHotkey['D'] = VK_RIGHT;
@@ -14,8 +23,9 @@ int main() {
     MagicFnHotkey['K'] = VK_DOWN;
     MagicFnHotkey['L'] = VK_RIGHT;
 
-    MagicFnHotkey['Q'] = VK_CONTROL;
-    MagicFnHotkey['W'] = VK_LSHIFT;
+    //MagicFnHotkey['Q'] = VK_CONTROL;
+    //MagicFnHotkey['W'] = VK_LSHIFT;
+    MagicFnHotkey['E'] = 20; // -> 'CAPSLOCK'
 
     MagicFnHotkey['1'] = VK_F1;
     MagicFnHotkey['2'] = VK_F2;
@@ -29,12 +39,18 @@ int main() {
     MagicFnHotkey['0'] = VK_F10;
     MagicFnHotkey[189] = VK_F11; // '-'
     MagicFnHotkey[187] = VK_F12; // '='
-    MagicFnHotkey[186] = 13; // ';' - ENTER
+
+    MagicFnHotkey[219] = VK_PGUP; // '['
+    MagicFnHotkey[221] = VK_PGDOWN; // ']'
     
+    MagicFnHotkey['R'] = VK_INSERT;
+
     MagicFnHotkey['U'] = VK_HOME;
     MagicFnHotkey['O'] = VK_END;
     MagicFnHotkey['N'] = VK_BACK;
     MagicFnHotkey['M'] = VK_DELETE;
+    MagicFnHotkey[VK_OEM_1] = VK_RETURN; // ';' -> ENTER
+
     
     MagicFnHotkey['H'] = 21; // 'ÇÑ/¿µ'
 
