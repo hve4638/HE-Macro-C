@@ -1,69 +1,69 @@
 #include "KeyHook.h"
+#include "InputQueue.h"
+#include "InputEditer.h"
 
-LRESULT NoEvent(PKBDLLHOOKSTRUCT p) {
-    return 1;
-}
+namespace KeyHook {
+    // 1 리턴은 기존값 블록, 0 리턴은 기존값도 입력
 
-LRESULT EventPress(PKBDLLHOOKSTRUCT p) {
-    INPUT input[1];
-    ZeroMemory(input, sizeof(input));
+    LRESULT NoEvent(PKBDLLHOOKSTRUCT p) {
+        return 1;
+    }
 
-    SetInputKeyDown(input[0], VK_LCONTROL);
-    SendInput(1, input, sizeof(INPUT));
-    return 1;
-}
+    LRESULT EventDownWithCtrl(PKBDLLHOOKSTRUCT p) {
+        InputQueue::Instance.push(VK_CONTROL, DOWN);
+        InputQueue::Instance.push(p->vkCode, DOWN);
+        return 1;
+    }
+    LRESULT EventUpWithCtrl(PKBDLLHOOKSTRUCT p) {
+        InputQueue::Instance.push(VK_CONTROL, UP);
+        InputQueue::Instance.push(p->vkCode, UP);
+        return 1;
+    }
 
-LRESULT EventRelease(PKBDLLHOOKSTRUCT p) {
-    INPUT input[1];
-    ZeroMemory(input, sizeof(input));
+    LRESULT EventPressWithCtrl(PKBDLLHOOKSTRUCT p) {
+        INPUT input[2];
+        ZeroMemory(input, sizeof(input));
 
-    SetInputKeyUp(input[0], VK_LCONTROL);
+        InputEditer::Down(input[0], VK_LCONTROL);
+        InputEditer::Down(input[1], (WORD)(p->vkCode));
 
-    SendInput(1, input, sizeof(INPUT));
-    return 1;
-}
+        //PushSendQueue(2, input);
+        InputQueue::Instance.push(2, input);
+        return 1;
+    }
 
-LRESULT EventPressWithCtrl(PKBDLLHOOKSTRUCT p) {
-    INPUT input[2];
-    ZeroMemory(input, sizeof(input));
+    LRESULT EventReleaseWithCtrl(PKBDLLHOOKSTRUCT p) {
+        INPUT input[2];
+        ZeroMemory(input, sizeof(input));
 
-    SetInputKeyDown(input[0], VK_LCONTROL);
-    SetInputKeyDown(input[1], (WORD)(p->vkCode));
+        InputEditer::Up(input[0], VK_LCONTROL);
+        InputEditer::Up(input[1], (WORD)(p->vkCode));
 
-    //PushSendQueue(2, input);
-    SendInput(2, input, sizeof(INPUT));
-    return 1;
-}
-
-LRESULT EventReleaseWithCtrl(PKBDLLHOOKSTRUCT p) {
-    INPUT input[2];
-    ZeroMemory(input, sizeof(input));
-
-    SetInputKeyUp(input[0], VK_LCONTROL);
-    SetInputKeyUp(input[1], (WORD)(p->vkCode));
-
-    SendInput(2, input, sizeof(INPUT));
-    return 1;
-}
+        InputQueue::Instance.push(2, input);
+        return 1;
+    }
 
 
-LRESULT EventClick(PKBDLLHOOKSTRUCT p) {
-    INPUT input[1];
-    ZeroMemory(input, sizeof(input));
+    LRESULT EventClick(PKBDLLHOOKSTRUCT p) {
+        INPUT input[1];
+        ZeroMemory(input, sizeof(input));
 
-    SetInputKeyDown(input[0], (WORD)(p->vkCode));
+        InputEditer::Down(input[0], (WORD)(p->vkCode));
 
-    SendInput(1, input, sizeof(INPUT));
-    return 1;
-}
+        InputQueue::Instance.push(1, input);
+        return 1;
+    }
 
-LRESULT EventClickWithCtrl(PKBDLLHOOKSTRUCT p) {
-    INPUT input[2];
-    ZeroMemory(input, sizeof(input));
+    LRESULT EventClickWithCtrl(PKBDLLHOOKSTRUCT p) {
+        INPUT input[4];
+        ZeroMemory(input, sizeof(input));
 
-    SetInputKeyDown(input[0], VK_CONTROL);
-    SetInputKeyDown(input[0], (WORD)(p->vkCode));
+        InputEditer::Down(input[0], VK_CONTROL);
+        InputEditer::Down(input[1], (WORD)(p->vkCode));
+        InputEditer::Up(input[2], (WORD)(p->vkCode));
+        InputEditer::Up(input[3], VK_CONTROL);
 
-    SendInput(1, input, sizeof(INPUT));
-    return 1;
+        InputQueue::Instance.push(4, input);
+        return 1;
+    }
 }

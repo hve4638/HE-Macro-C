@@ -1,31 +1,10 @@
-#include <Windows.h>
-#define MAGICFN_RANGE 256
+#pragma once
+#include "precompiled.h"
+#include "keyEvents.h"
+#include "InputQueue.h"
+#include "KeyListener.h"
+#include "KeyHooker.h"
 
-typedef LRESULT(*KeyEvent)(PKBDLLHOOKSTRUCT);
-
-extern KeyEvent MagicFnPressEvent[MAGICFN_RANGE];
-extern KeyEvent MagicFnReleaseEvent[MAGICFN_RANGE];
-extern WORD MagicFnHotkey[MAGICFN_RANGE];
-extern int KeyInMagicFnRange(DWORD vk);
-
-void PopSendQueue();
-void PushSendQueue(size_t, INPUT[]);
-bool IsSendQueueEmpty();
-bool EqualsInputAndFirstNode(INPUT&);
-
-extern LRESULT OnKeyPressed(PKBDLLHOOKSTRUCT);
-extern LRESULT OnKeyReleased(PKBDLLHOOKSTRUCT);
-
-extern void RunKeyHook();
-
-extern void MaginFnSetKey(WORD, KeyEvent, KeyEvent);
-
-extern void SetInputKeyDown(INPUT& input, WORD vk);
-extern void SetInputKeyUp(INPUT& input, WORD vk);
-
-extern LRESULT NoEvent(PKBDLLHOOKSTRUCT);
-extern LRESULT EventPressWithCtrl(PKBDLLHOOKSTRUCT);
-extern LRESULT EventReleaseWithCtrl(PKBDLLHOOKSTRUCT);
-
-extern LRESULT EventPress(PKBDLLHOOKSTRUCT p);
-extern LRESULT EventRelease(PKBDLLHOOKSTRUCT p);
+namespace KeyHook {
+    void RunKeyHook(KeyHooker*);
+}

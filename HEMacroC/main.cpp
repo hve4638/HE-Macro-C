@@ -1,59 +1,79 @@
 #include "KeyHook.h"
-#define VK_PGUP 33
-#define VK_PGDOWN 34
+#include "VKExtend.h"
 
 using namespace std;
+using namespace KeyHook;
 
 int main() {
-    MaginFnSetKey('Z', &EventPressWithCtrl, &EventPressWithCtrl);
-    MaginFnSetKey('X', &EventPressWithCtrl, &EventPressWithCtrl);
-    MaginFnSetKey('C', &EventPressWithCtrl, &EventPressWithCtrl);
-    MaginFnSetKey('V', &EventPressWithCtrl, &EventPressWithCtrl);
-    MaginFnSetKey('B', &EventPressWithCtrl, &EventPressWithCtrl);
-
-    MaginFnSetKey(VK_CONTROL, &EventPress, &EventRelease);
-    MaginFnSetKey(VK_SHIFT, &EventPress, &EventRelease);
-
-    MagicFnHotkey['A'] = VK_LEFT;
-    MagicFnHotkey['S'] = VK_DOWN;
-    MagicFnHotkey['D'] = VK_RIGHT;
-
-    MagicFnHotkey['I'] = VK_UP;
-    MagicFnHotkey['J'] = VK_LEFT;
-    MagicFnHotkey['K'] = VK_DOWN;
-    MagicFnHotkey['L'] = VK_RIGHT;
-
-    //MagicFnHotkey['Q'] = VK_CONTROL;
-    //MagicFnHotkey['W'] = VK_LSHIFT;
-    MagicFnHotkey['E'] = 20; // -> 'CAPSLOCK'
-
-    MagicFnHotkey['1'] = VK_F1;
-    MagicFnHotkey['2'] = VK_F2;
-    MagicFnHotkey['3'] = VK_F3;
-    MagicFnHotkey['4'] = VK_F4;
-    MagicFnHotkey['5'] = VK_F5;
-    MagicFnHotkey['6'] = VK_F6;
-    MagicFnHotkey['7'] = VK_F7;
-    MagicFnHotkey['8'] = VK_F8;
-    MagicFnHotkey['9'] = VK_F9;
-    MagicFnHotkey['0'] = VK_F10;
-    MagicFnHotkey[189] = VK_F11; // '-'
-    MagicFnHotkey[187] = VK_F12; // '='
-
-    MagicFnHotkey[219] = VK_PGUP; // '['
-    MagicFnHotkey[221] = VK_PGDOWN; // ']'
+    KeyHooker hooker;
+    KeyListener listener;
+    MagicFnEvents magicFnEvents;
     
-    MagicFnHotkey['R'] = VK_INSERT;
+    magicFnEvents.setPressAndReleaseEvent('Z', &EventDownWithCtrl, &EventUpWithCtrl);
+    magicFnEvents.setPressAndReleaseEvent('X', &EventDownWithCtrl, &EventUpWithCtrl);
+    magicFnEvents.setPressAndReleaseEvent('C', &EventDownWithCtrl, &EventUpWithCtrl);
+    magicFnEvents.setPressAndReleaseEvent('V', &EventDownWithCtrl, &EventUpWithCtrl);
+    magicFnEvents.setPressAndReleaseEvent('B', &EventDownWithCtrl, &EventUpWithCtrl);
 
-    MagicFnHotkey['U'] = VK_HOME;
-    MagicFnHotkey['O'] = VK_END;
-    MagicFnHotkey['N'] = VK_BACK;
-    MagicFnHotkey['M'] = VK_DELETE;
-    MagicFnHotkey[VK_OEM_1] = VK_RETURN; // ';' -> ENTER
+    magicFnEvents.pressEvents['Q'] = KeyEventLambda(p) {
+        InputQueue::Instance.push(VK_CONTROL, DOWN);
+        return 1;
+    };
+    magicFnEvents.releaseEvents['Q'] = KeyEventLambda(p) {
+        InputQueue::Instance.push(VK_CONTROL, UP);
+        return 1;
+    };
+    magicFnEvents.pressEvents['W'] = KeyEventLambda(p) {
+        InputQueue::Instance.push(VK_SHIFT, DOWN);
+        return 1;
+    };
+    magicFnEvents.releaseEvents['W'] = KeyEventLambda(p) {
+        InputQueue::Instance.push(VK_SHIFT, UP);
+        return 1;
+    };
 
+
+    magicFnEvents.hotkey['E'] = VK_CAPITAL;
+    magicFnEvents.hotkey['A'] = VK_LEFT;
+    magicFnEvents.hotkey['D'] = VK_RIGHT;
+
+    magicFnEvents.hotkey['I'] = VK_UP;
+    magicFnEvents.hotkey['J'] = VK_LEFT;
+    magicFnEvents.hotkey['K'] = VK_DOWN;
+    magicFnEvents.hotkey['L'] = VK_RIGHT;
+
+    //magicFnEvents.hotkey['Q'] = VK_CONTROL;
+    //magicFnEvents.hotkey['W'] = VK_LSHIFT;
+    //magicFnEvents.hotkey['E'] = VK_CAPITAL;xx
+
+    magicFnEvents.hotkey['1'] = VK_F1;
+    magicFnEvents.hotkey['2'] = VK_F2;
+    magicFnEvents.hotkey['3'] = VK_F3;
+    magicFnEvents.hotkey['4'] = VK_F4;
+    magicFnEvents.hotkey['5'] = VK_F5;
+    magicFnEvents.hotkey['6'] = VK_F6;
+    magicFnEvents.hotkey['7'] = VK_F7;
+    magicFnEvents.hotkey['8'] = VK_F8;
+    magicFnEvents.hotkey['9'] = VK_F9;
+    magicFnEvents.hotkey['0'] = VK_F10;
+    magicFnEvents.hotkey[189] = VK_F11; // '-'
+    magicFnEvents.hotkey[187] = VK_F12; // '='
+
+    magicFnEvents.hotkey[219] = VK_PGUP; // '['
+    magicFnEvents.hotkey[221] = VK_PGDOWN; // ']'
     
-    MagicFnHotkey['H'] = 21; // '한/영'
+    magicFnEvents.hotkey['R'] = VK_INSERT;
 
-    RunKeyHook();
+    magicFnEvents.hotkey['U'] = VK_HOME;
+    magicFnEvents.hotkey['O'] = VK_END;
+    magicFnEvents.hotkey['N'] = VK_BACK;
+    magicFnEvents.hotkey['M'] = VK_DELETE;
+    magicFnEvents.hotkey[VK_OEM_1] = VK_RETURN; // ';' -> ENTER
+
+    magicFnEvents.hotkey['H'] = 21; // '한/영'
+
+    listener.setMagicFnEvents(&magicFnEvents);
+    hooker.setKeyListener(&listener);
+    hooker.run();
     return 0;
 }
