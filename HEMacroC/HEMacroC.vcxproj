@@ -134,6 +134,7 @@
     <ClCompile Include="KeyHook.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="OnKeyReleased.cpp" />
+    <ClCompile Include="sendqueue.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="KeyHook.h" />

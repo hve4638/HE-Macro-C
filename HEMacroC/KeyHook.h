@@ -8,6 +8,11 @@ extern KeyEvent MagicFnReleaseEvent[MAGICFN_RANGE];
 extern WORD MagicFnHotkey[MAGICFN_RANGE];
 extern int KeyInMagicFnRange(DWORD vk);
 
+void PopSendQueue();
+void PushSendQueue(size_t, INPUT[]);
+bool IsSendQueueEmpty();
+bool EqualsInputAndFirstNode(INPUT&);
+
 extern LRESULT OnKeyPressed(PKBDLLHOOKSTRUCT);
 extern LRESULT OnKeyReleased(PKBDLLHOOKSTRUCT);
 

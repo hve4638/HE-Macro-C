@@ -9,7 +9,6 @@ LRESULT EventPress(PKBDLLHOOKSTRUCT p) {
     ZeroMemory(input, sizeof(input));
 
     SetInputKeyDown(input[0], VK_LCONTROL);
-
     SendInput(1, input, sizeof(INPUT));
     return 1;
 }
@@ -31,6 +30,7 @@ LRESULT EventPressWithCtrl(PKBDLLHOOKSTRUCT p) {
     SetInputKeyDown(input[0], VK_LCONTROL);
     SetInputKeyDown(input[1], (WORD)(p->vkCode));
 
+    //PushSendQueue(2, input);
     SendInput(2, input, sizeof(INPUT));
     return 1;
 }

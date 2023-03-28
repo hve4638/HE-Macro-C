@@ -7,5 +7,5 @@ void SetInputKeyDown(INPUT& input, WORD vk) {
 void SetInputKeyUp(INPUT& input, WORD vk) {
     input.type = INPUT_KEYBOARD;
     input.ki.wVk = vk;
-    input.ki.wVk = KEYEVENTF_KEYUP;
+    input.ki.dwFlags = KEYEVENTF_KEYUP;
 }
