@@ -1,3 +1,4 @@
+#include "pch.h"
 #include "KeyHook.h"
 using namespace std;
 

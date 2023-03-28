@@ -21,19 +21,7 @@
     <ClInclude Include="pch.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="..\HEMacroC\precompiled.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="..\HEMacroC\KeyHook.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="..\HEMacroC\KeyListener.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="..\HEMacroC\KeyEvents.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="..\HEMacroC\InputQueue.h">
+    <ClInclude Include="KeyHook.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
@@ -42,6 +30,24 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="pch.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="KeyListener.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="MagicFnEvents.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="CKeyHook.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="InputEditer.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="InputQueue.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="KeyHooker.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

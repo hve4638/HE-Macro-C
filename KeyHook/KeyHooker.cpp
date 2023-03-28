@@ -1,5 +1,5 @@
+#include "pch.h"
 #include "KeyHook.h"
-using namespace std;
 
 namespace KeyHook {
     void KeyHooker::setKeyListener(IKeyListener* listener) {
@@ -13,19 +13,16 @@ namespace KeyHook {
     LRESULT KeyHooker::onHook(int nCode, WPARAM wParam, LPARAM lParam) {
         if (nCode == HC_ACTION) {
             PKBDLLHOOKSTRUCT p = (PKBDLLHOOKSTRUCT)lParam;
-            
+
             if (!InputQueue::Instance.isEmpty()) {
                 InputNodeFlags nFlag = (wParam == WM_KEYDOWN) ? DOWN : UP;
                 if (InputQueue::Instance.match(p->vkCode, nFlag)) {
-                    cout << "Ignored " << InputQueue::Instance.count() << endl;
                     InputQueue::Instance.pop();
 
                     goto normalExit;
                 }
             }
             if (p->vkCode == 20) {
-                //if (InputQueue::Instance.match(p->vkCode, nFlag)) goto normalExit;
-
                 if (wParam == WM_KEYDOWN) m_magicFnEnabled = true;
                 else if (wParam == WM_KEYUP) m_magicFnEnabled = false;
 
@@ -50,14 +47,3 @@ namespace KeyHook {
         return 1;
     }
 }
-
-/*
-    auto node = InputQueue::Instance.rawNodeBegin();
-    while (node != NULL) {
-
-        if (node->flag == UP) cout << "^";
-        cout << node->vkCode << " ";
-        node = node->next;
-    }
-    cout << endl;
-*/

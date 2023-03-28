@@ -24,6 +24,7 @@
     <ProjectGuid>{62c4f8f7-86d6-4a4e-a4d7-85650c855f12}</ProjectGuid>
     <RootNamespace>HEMacroC</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>HEMacroMonolith</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -132,7 +133,6 @@
     <ClCompile Include="InputEditer.cpp" />
     <ClCompile Include="KeyEvents.cpp" />
     <ClCompile Include="KeyHooker.cpp" />
-    <ClCompile Include="MagicFn.cpp" />
     <ClCompile Include="MagicFnEvents.cpp" />
     <ClCompile Include="OnKeyPressedLegacy.cpp" />
     <ClCompile Include="KeyHookLegacy.cpp" />

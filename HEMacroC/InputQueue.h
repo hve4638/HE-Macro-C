@@ -40,5 +40,4 @@ namespace KeyHook {
 
         InputQueueNode* rawNodeBegin();
     };
-
 }

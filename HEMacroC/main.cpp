@@ -1,4 +1,5 @@
 #include "KeyHook.h"
+#include "keyEvents.h"
 #include "VKExtend.h"
 
 using namespace std;
