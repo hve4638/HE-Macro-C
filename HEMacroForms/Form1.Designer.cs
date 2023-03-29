@@ -32,8 +32,9 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             Notification = new NotifyIcon(components);
             ContextMenu = new ContextMenuStrip(components);
-            exitToolStripMenuItem = new ToolStripMenuItem();
-            resetQueueToolStripMenuItem = new ToolStripMenuItem();
+            ResetQueueMenuItem = new ToolStripMenuItem();
+            DebugMenuItem = new ToolStripMenuItem();
+            ExitMenuItem = new ToolStripMenuItem();
             ContextMenu.SuspendLayout();
             SuspendLayout();
             // 
@@ -44,34 +45,41 @@
             Notification.Icon = (Icon)resources.GetObject("Notification.Icon");
             Notification.Text = "HEMacro";
             Notification.Visible = true;
-            Notification.MouseDoubleClick += notifyIcon1_MouseDoubleClick;
             // 
             // ContextMenu
             // 
             ContextMenu.ImageScalingSize = new Size(36, 36);
-            ContextMenu.Items.AddRange(new ToolStripItem[] { exitToolStripMenuItem, resetQueueToolStripMenuItem });
+            ContextMenu.Items.AddRange(new ToolStripItem[] { ResetQueueMenuItem, DebugMenuItem, ExitMenuItem });
             ContextMenu.Name = "contextMenuStrip1";
-            ContextMenu.Size = new Size(331, 142);
+            ContextMenu.Size = new Size(138, 70);
             // 
-            // exitToolStripMenuItem
+            // ResetQueueMenuItem
             // 
-            exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            exitToolStripMenuItem.Size = new Size(330, 44);
-            exitToolStripMenuItem.Text = "ResetQueue";
-            exitToolStripMenuItem.Click += exitToolStripMenuItem_Click;
+            ResetQueueMenuItem.Name = "ResetQueueMenuItem";
+            ResetQueueMenuItem.Size = new Size(137, 22);
+            ResetQueueMenuItem.Text = "ResetQueue";
+            ResetQueueMenuItem.Click += ResetQueueMenuItem_Click;
             // 
-            // resetQueueToolStripMenuItem
+            // DebugMenuItem
             // 
-            resetQueueToolStripMenuItem.Name = "resetQueueToolStripMenuItem";
-            resetQueueToolStripMenuItem.Size = new Size(330, 44);
-            resetQueueToolStripMenuItem.Text = "Exit";
-            resetQueueToolStripMenuItem.Click += resetQueueToolStripMenuItem_Click;
+            DebugMenuItem.Name = "DebugMenuItem";
+            DebugMenuItem.Size = new Size(137, 22);
+            DebugMenuItem.Text = "Debug";
+            DebugMenuItem.Click += DebugMenuItem_Click;
+            // 
+            // ExitMenuItem
+            // 
+            ExitMenuItem.Name = "ExitMenuItem";
+            ExitMenuItem.Size = new Size(137, 22);
+            ExitMenuItem.Text = "Exit";
+            ExitMenuItem.Click += ExitMenuItem_Click;
             // 
             // Form1
             // 
-            AutoScaleDimensions = new SizeF(15F, 37F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(373, 182);
+            Margin = new Padding(1);
             Name = "Form1";
             Text = "Form1";
             Load += Form1_Load;
@@ -83,7 +91,8 @@
 
         private NotifyIcon Notification;
         private ContextMenuStrip ContextMenu;
-        private ToolStripMenuItem exitToolStripMenuItem;
-        private ToolStripMenuItem resetQueueToolStripMenuItem;
+        private ToolStripMenuItem ResetQueueMenuItem;
+        private ToolStripMenuItem DebugMenuItem;
+        private ToolStripMenuItem ExitMenuItem;
     }
 }

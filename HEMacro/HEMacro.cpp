@@ -2,6 +2,7 @@
 #include "HEMacro.h"
 #include "KeyHook.h"
 #include "KeyEvents.h"
+#include "HEKeyListener.h"
 #define VK_PGUP 33
 #define VK_PGDOWN 34
 
@@ -15,13 +16,14 @@ void stopMacro() {
 
 void runMacro() {
     KeyHooker hooker;
-    KeyListener listener;
+    KeyListener* listener = new KeyListener();
     MagicFnEvents* magicFnEvents = makeKeyEvents();
 
-    listener.setMagicFnEvents(magicFnEvents);
-    hooker.setKeyListener(&listener);
+    listener->setMagicFnEvents(magicFnEvents);
+    hooker.setKeyListener(listener);
     hooker.run();
 
+    delete listener;
     delete magicFnEvents;
 }
 
@@ -41,19 +43,19 @@ MagicFnEvents* makeKeyEvents() {
     magicFnEvents->setPressAndReleaseEvent('B', &EventDownWithCtrl, &EventUpWithCtrl);
 
     magicFnEvents->pressEvents['Q'] = KeyEventLambda(p) {
-        InputQueue::Instance.push(VK_CONTROL, DOWN);
+        InputQueue::Instance.push(VK_LCONTROL, DOWN);
         return 1;
     };
     magicFnEvents->releaseEvents['Q'] = KeyEventLambda(p) {
-        InputQueue::Instance.push(VK_CONTROL, UP);
+        InputQueue::Instance.push(VK_LCONTROL, UP);
         return 1;
     };
     magicFnEvents->pressEvents['W'] = KeyEventLambda(p) {
-        InputQueue::Instance.push(VK_SHIFT, DOWN);
+        InputQueue::Instance.push(VK_LSHIFT, DOWN);
         return 1;
     };
     magicFnEvents->releaseEvents['W'] = KeyEventLambda(p) {
-        InputQueue::Instance.push(VK_SHIFT, UP);
+        InputQueue::Instance.push(VK_LSHIFT, UP);
         return 1;
     };
 

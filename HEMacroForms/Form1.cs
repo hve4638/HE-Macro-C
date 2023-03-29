@@ -12,21 +12,22 @@ namespace HEMacroForms
             Size = new Size(0, 0);
         }
 
-        private void notifyIcon1_MouseDoubleClick(object sender, MouseEventArgs e)
-        {
-        }
-
-        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            HEMacro.clearInputQueue();
-        }
-
         private void Form1_Load(object sender, EventArgs e)
         {
 
         }
 
-        private void resetQueueToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ResetQueueMenuItem_Click(object sender, EventArgs e)
+        {
+            HEMacro.clearInputQueue();
+        }
+
+        private void DebugMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ExitMenuItem_Click(object sender, EventArgs e)
         {
             Close();
         }

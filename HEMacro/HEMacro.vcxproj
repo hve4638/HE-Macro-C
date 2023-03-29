@@ -143,12 +143,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="framework.h" />
+    <ClInclude Include="HEKeyListener.h" />
     <ClInclude Include="HEMacro.h" />
     <ClInclude Include="KeyEvents.h" />
     <ClInclude Include="pch.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp" />
+    <ClCompile Include="HEKeyListener.cpp" />
     <ClCompile Include="HEMacro.cpp" />
     <ClCompile Include="KeyEvents.cpp" />
     <ClCompile Include="pch.cpp">

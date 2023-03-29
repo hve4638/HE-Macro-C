@@ -6,10 +6,15 @@
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
+    <ApplicationIcon>hemacro.ico</ApplicationIcon>
   </PropertyGroup>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
     <Exec Command="call $(ProjectDir)postbuild.bat $(SolutionDir) $(TargetDir)&#xD;&#xA;" />
   </Target>
+
+  <ItemGroup>
+    <Content Include="hemacro.ico" />
+  </ItemGroup>
 
 </Project>
