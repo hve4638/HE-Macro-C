@@ -48,7 +48,7 @@ namespace KeyHook {
     };
 
     class KEYHOOK_API KeyListener : public IKeyListener {
-        MagicFnEvents* m_magicFnEvents;
+        MagicFnEvents* m_magicFnEvents = NULL;
     public:
         void setMagicFnEvents(MagicFnEvents*);
 
@@ -96,5 +96,6 @@ namespace KeyHook {
     };
 
 
-    extern "C" KEYHOOK_API void RunKeyHook(KeyHooker*);
+    extern "C" KEYHOOK_API void stopKeyHook();
+    extern "C" KEYHOOK_API void runKeyHook(KeyHooker*);
 }

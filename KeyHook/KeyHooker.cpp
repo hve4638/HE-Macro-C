@@ -7,7 +7,7 @@ namespace KeyHook {
     }
 
     void KeyHooker::run() {
-        RunKeyHook(this);
+        runKeyHook(this);
     }
 
     LRESULT KeyHooker::onHook(int nCode, WPARAM wParam, LPARAM lParam) {

@@ -1,15 +1,21 @@
+#include "pch.h"
+#include "HEMacro.h"
 #include "KeyHook.h"
-#include "keyEvents.h"
-#include "VKExtend.h"
+#include "KeyEvents.h"
+#define VK_PGUP 33
+#define VK_PGDOWN 34
 
-using namespace std;
 using namespace KeyHook;
 
-int main() {
+void stopMacro() {
+    stopKeyHook();
+}
+
+void runMacro() {
     KeyHooker hooker;
     KeyListener listener;
     MagicFnEvents magicFnEvents;
-    
+
     magicFnEvents.setPressAndReleaseEvent('Z', &EventDownWithCtrl, &EventUpWithCtrl);
     magicFnEvents.setPressAndReleaseEvent('X', &EventDownWithCtrl, &EventUpWithCtrl);
     magicFnEvents.setPressAndReleaseEvent('C', &EventDownWithCtrl, &EventUpWithCtrl);
@@ -62,7 +68,7 @@ int main() {
 
     magicFnEvents.hotkey[219] = VK_PGUP; // '['
     magicFnEvents.hotkey[221] = VK_PGDOWN; // ']'
-    
+
     magicFnEvents.hotkey['R'] = VK_INSERT;
 
     magicFnEvents.hotkey['U'] = VK_HOME;
@@ -76,5 +82,4 @@ int main() {
     listener.setMagicFnEvents(&magicFnEvents);
     hooker.setKeyListener(&listener);
     hooker.run();
-    return 0;
 }
