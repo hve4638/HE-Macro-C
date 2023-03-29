@@ -8,5 +8,6 @@
 #endif
 
 extern "C" HEMACRO_API void runMacro();
+extern "C" HEMACRO_API void runMacroDebug();
 extern "C" HEMACRO_API void stopMacro();
 extern "C" HEMACRO_API void clearInputQueue();

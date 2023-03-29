@@ -22,7 +22,7 @@ namespace KeyHook {
                     goto normalExit;
                 }
             }
-            if (p->vkCode == 20) {
+            if (p->vkCode == VK_CAPITAL) {
                 if (wParam == WM_KEYDOWN) m_magicFnEnabled = true;
                 else if (wParam == WM_KEYUP) m_magicFnEnabled = false;
 

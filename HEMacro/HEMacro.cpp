@@ -14,6 +14,18 @@ void stopMacro() {
     stopKeyHook();
 }
 
+void runMacroDebug() {
+    KeyHooker hooker;
+    KeyListener* listener = new HEKeyListener();
+    MagicFnEvents* magicFnEvents = makeKeyEvents();
+
+    listener->setMagicFnEvents(magicFnEvents);
+    hooker.setKeyListener(listener);
+    hooker.run();
+
+    delete listener;
+    delete magicFnEvents;
+}
 void runMacro() {
     KeyHooker hooker;
     KeyListener* listener = new KeyListener();
@@ -41,6 +53,10 @@ MagicFnEvents* makeKeyEvents() {
     magicFnEvents->setPressAndReleaseEvent('C', &EventDownWithCtrl, &EventUpWithCtrl);
     magicFnEvents->setPressAndReleaseEvent('V', &EventDownWithCtrl, &EventUpWithCtrl);
     magicFnEvents->setPressAndReleaseEvent('B', &EventDownWithCtrl, &EventUpWithCtrl);
+    magicFnEvents->setPressAndReleaseEvent('A', &EventDownWithCtrl, &EventUpWithCtrl);
+    magicFnEvents->setPressAndReleaseEvent('S', &EventDownWithCtrl, &EventUpWithCtrl);
+    magicFnEvents->setPressAndReleaseEvent('D', &EventDownWithCtrl, &EventUpWithCtrl);
+    magicFnEvents->setPressAndReleaseEvent('F', &EventDownWithCtrl, &EventUpWithCtrl);
 
     magicFnEvents->pressEvents['Q'] = KeyEventLambda(p) {
         InputQueue::Instance.push(VK_LCONTROL, DOWN);
@@ -60,8 +76,6 @@ MagicFnEvents* makeKeyEvents() {
     };
 
     magicFnEvents->hotkey['E'] = VK_CAPITAL;
-    magicFnEvents->hotkey['A'] = VK_LEFT;
-    magicFnEvents->hotkey['D'] = VK_RIGHT;
 
     magicFnEvents->hotkey['I'] = VK_UP;
     magicFnEvents->hotkey['J'] = VK_LEFT;
@@ -81,8 +95,8 @@ MagicFnEvents* makeKeyEvents() {
     magicFnEvents->hotkey[189] = VK_F11; // '-'
     magicFnEvents->hotkey[187] = VK_F12; // '='
 
-    magicFnEvents->hotkey[219] = VK_PGUP; // '['
-    magicFnEvents->hotkey[221] = VK_PGDOWN; // ']'
+    magicFnEvents->hotkey[0xDB] = VK_PGUP; // '['
+    magicFnEvents->hotkey[0xDD] = VK_PGDOWN; // ']'
 
     magicFnEvents->hotkey['R'] = VK_INSERT;
 
@@ -90,7 +104,7 @@ MagicFnEvents* makeKeyEvents() {
     magicFnEvents->hotkey['O'] = VK_END;
     magicFnEvents->hotkey['N'] = VK_BACK;
     magicFnEvents->hotkey['M'] = VK_DELETE;
-    magicFnEvents->hotkey[VK_OEM_1] = VK_RETURN; // ';' -> ENTER
+    magicFnEvents->hotkey[0xBA] = VK_RETURN; // ';' -> ENTER
 
     magicFnEvents->hotkey['H'] = 21; // 'ÇÑ/¿µ'
 

@@ -8,7 +8,7 @@ namespace KeyHook {
 
 	LRESULT KeyListener::pressing(PKBDLLHOOKSTRUCT p) {
         DWORD vkCode = p->vkCode;
-        if (vkCode >= 'A' && vkCode <= 'Z') {
+        if (vkCode >= 0 && vkCode < MAGICFN_RANGE) {
             DWORD hotkey = m_magicFnEvents->hotkey[vkCode];
 
             if (hotkey != 0) {
