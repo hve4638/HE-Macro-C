@@ -33,6 +33,7 @@
             Notification = new NotifyIcon(components);
             ContextMenu = new ContextMenuStrip(components);
             exitToolStripMenuItem = new ToolStripMenuItem();
+            resetQueueToolStripMenuItem = new ToolStripMenuItem();
             ContextMenu.SuspendLayout();
             SuspendLayout();
             // 
@@ -48,16 +49,23 @@
             // ContextMenu
             // 
             ContextMenu.ImageScalingSize = new Size(36, 36);
-            ContextMenu.Items.AddRange(new ToolStripItem[] { exitToolStripMenuItem });
+            ContextMenu.Items.AddRange(new ToolStripItem[] { exitToolStripMenuItem, resetQueueToolStripMenuItem });
             ContextMenu.Name = "contextMenuStrip1";
-            ContextMenu.Size = new Size(138, 48);
+            ContextMenu.Size = new Size(331, 142);
             // 
             // exitToolStripMenuItem
             // 
             exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            exitToolStripMenuItem.Size = new Size(137, 44);
-            exitToolStripMenuItem.Text = "Exit";
+            exitToolStripMenuItem.Size = new Size(330, 44);
+            exitToolStripMenuItem.Text = "ResetQueue";
             exitToolStripMenuItem.Click += exitToolStripMenuItem_Click;
+            // 
+            // resetQueueToolStripMenuItem
+            // 
+            resetQueueToolStripMenuItem.Name = "resetQueueToolStripMenuItem";
+            resetQueueToolStripMenuItem.Size = new Size(330, 44);
+            resetQueueToolStripMenuItem.Text = "Exit";
+            resetQueueToolStripMenuItem.Click += resetQueueToolStripMenuItem_Click;
             // 
             // Form1
             // 
@@ -76,5 +84,6 @@
         private NotifyIcon Notification;
         private ContextMenuStrip ContextMenu;
         private ToolStripMenuItem exitToolStripMenuItem;
+        private ToolStripMenuItem resetQueueToolStripMenuItem;
     }
 }

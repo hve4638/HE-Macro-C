@@ -18,12 +18,17 @@ namespace HEMacroForms
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Close();
+            HEMacro.clearInputQueue();
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void resetQueueToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }

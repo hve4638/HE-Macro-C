@@ -14,5 +14,8 @@ namespace HEMacroForms
 
         [DllImport("HEMacro.dll")]
         extern public static void stopMacro();
+
+        [DllImport("HEMacro.dll")]
+        extern public static void clearInputQueue();
     }
 }
