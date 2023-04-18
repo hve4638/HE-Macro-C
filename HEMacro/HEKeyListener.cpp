@@ -5,7 +5,7 @@
 using namespace std;
 
 namespace KeyHook {
-    LRESULT HEKeyListener::pressing(PKBDLLHOOKSTRUCT p) {
+    LRESULT HEKeyListener::pressing(PKBDLLHOOKSTRUCT &p) {
         cout << "pressing " << p->vkCode << endl;
 
         auto node = InputQueue::Instance.rawNodeBegin();
@@ -17,7 +17,7 @@ namespace KeyHook {
 
         return KeyListener::pressing(p);
     }
-    LRESULT HEKeyListener::releasing(PKBDLLHOOKSTRUCT p) {
+    LRESULT HEKeyListener::releasing(PKBDLLHOOKSTRUCT &p) {
         return KeyListener::releasing(p);
     }
 }

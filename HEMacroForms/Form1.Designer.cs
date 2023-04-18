@@ -51,35 +51,35 @@
             ContextMenu.ImageScalingSize = new Size(36, 36);
             ContextMenu.Items.AddRange(new ToolStripItem[] { ResetQueueMenuItem, DebugMenuItem, ExitMenuItem });
             ContextMenu.Name = "contextMenuStrip1";
-            ContextMenu.Size = new Size(138, 70);
+            ContextMenu.Size = new Size(331, 186);
             // 
             // ResetQueueMenuItem
             // 
             ResetQueueMenuItem.Name = "ResetQueueMenuItem";
-            ResetQueueMenuItem.Size = new Size(137, 22);
-            ResetQueueMenuItem.Text = "ResetQueue";
+            ResetQueueMenuItem.Size = new Size(330, 44);
+            ResetQueueMenuItem.Text = "reset queue";
             ResetQueueMenuItem.Click += ResetQueueMenuItem_Click;
             // 
             // DebugMenuItem
             // 
             DebugMenuItem.Name = "DebugMenuItem";
-            DebugMenuItem.Size = new Size(137, 22);
-            DebugMenuItem.Text = "Debug";
+            DebugMenuItem.Size = new Size(330, 44);
+            DebugMenuItem.Text = "show queue log";
             DebugMenuItem.Click += DebugMenuItem_Click;
             // 
             // ExitMenuItem
             // 
             ExitMenuItem.Name = "ExitMenuItem";
-            ExitMenuItem.Size = new Size(137, 22);
-            ExitMenuItem.Text = "Exit";
+            ExitMenuItem.Size = new Size(330, 44);
+            ExitMenuItem.Text = "exit";
             ExitMenuItem.Click += ExitMenuItem_Click;
             // 
             // Form1
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(15F, 37F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(373, 182);
-            Margin = new Padding(1);
+            ClientSize = new Size(799, 449);
+            Margin = new Padding(2);
             Name = "Form1";
             Text = "Form1";
             Load += Form1_Load;

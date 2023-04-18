@@ -3,7 +3,7 @@
 #include <Windows.h>
 #define MAGICFN_RANGE 256
 #define VKCODE DWORD
-#define KeyEventLambda(x) [](PKBDLLHOOKSTRUCT x) -> LRESULT
+#define KeyEventLambda(x) [](PKBDLLHOOKSTRUCT &x) -> LRESULT
 
 #ifdef KEYHOOK_EXPORTS
 #define KEYHOOK_API __declspec(dllexport)
@@ -12,7 +12,8 @@
 #endif
 
 namespace KeyHook {
-    typedef LRESULT(*KeyEvent)(PKBDLLHOOKSTRUCT);
+    typedef LRESULT(*KeyEvent)(PKBDLLHOOKSTRUCT&);
+    typedef void(*OnInvoke)();
 
     namespace InputEditer {
         extern "C" KEYHOOK_API void Down(INPUT& input, WORD vk);
@@ -21,8 +22,9 @@ namespace KeyHook {
 
     class KEYHOOK_API IKeyListener {
     public:
-        virtual LRESULT pressing(PKBDLLHOOKSTRUCT) = 0;
-        virtual LRESULT releasing(PKBDLLHOOKSTRUCT) = 0;
+        virtual void onMagicFnChanged(bool) = 0;
+        virtual LRESULT pressing(PKBDLLHOOKSTRUCT&) = 0;
+        virtual LRESULT releasing(PKBDLLHOOKSTRUCT&) = 0;
     };
 
 
@@ -40,6 +42,8 @@ namespace KeyHook {
     class KEYHOOK_API MagicFnEvents {
     private:
     public:
+        OnInvoke onMagicFnEnabled = NULL;
+        OnInvoke onMagicFnDisabled = NULL;
         KeyEvent pressEvents[MAGICFN_RANGE] = { 0, };
         KeyEvent releaseEvents[MAGICFN_RANGE] = { 0, };
         WORD hotkey[MAGICFN_RANGE] = { 0, };
@@ -52,8 +56,9 @@ namespace KeyHook {
     public:
         void setMagicFnEvents(MagicFnEvents*);
 
-        LRESULT pressing(PKBDLLHOOKSTRUCT) override;
-        LRESULT releasing(PKBDLLHOOKSTRUCT) override;
+        void onMagicFnChanged(bool) override;
+        LRESULT pressing(PKBDLLHOOKSTRUCT&) override;
+        LRESULT releasing(PKBDLLHOOKSTRUCT&) override;
     };
 
     enum InputQueueState {

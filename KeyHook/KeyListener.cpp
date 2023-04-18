@@ -6,7 +6,18 @@ namespace KeyHook {
         m_magicFnEvents = magicFnEvents;
     }
 
-	LRESULT KeyListener::pressing(PKBDLLHOOKSTRUCT p) {
+    void KeyListener::onMagicFnChanged(bool enabled) {
+        if (enabled) {
+            auto invoker = m_magicFnEvents->onMagicFnEnabled;
+            if (invoker != NULL) invoker();
+        }
+        else {
+            auto invoker = m_magicFnEvents->onMagicFnDisabled;
+            if (invoker != NULL) invoker();
+        }
+    }
+
+	LRESULT KeyListener::pressing(PKBDLLHOOKSTRUCT &p) {
         DWORD vkCode = p->vkCode;
         if (vkCode >= 0 && vkCode < MAGICFN_RANGE) {
             DWORD hotkey = m_magicFnEvents->hotkey[vkCode];
@@ -23,7 +34,7 @@ namespace KeyHook {
         }
         return 0;
 	}
-	LRESULT KeyListener::releasing(PKBDLLHOOKSTRUCT p) {
+	LRESULT KeyListener::releasing(PKBDLLHOOKSTRUCT &p) {
         DWORD vkCode = p->vkCode;
 
         if (vkCode >= 0 && vkCode < MAGICFN_RANGE) {

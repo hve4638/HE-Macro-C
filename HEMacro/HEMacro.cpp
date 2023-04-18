@@ -1,4 +1,7 @@
 #include "pch.h"
+#include <fstream>
+#include <string>
+#include <windows.h>
 #include "HEMacro.h"
 #include "KeyHook.h"
 #include "KeyEvents.h"
@@ -6,9 +9,30 @@
 #define VK_PGUP 33
 #define VK_PGDOWN 34
 
+using namespace std;
 using namespace KeyHook;
 
 MagicFnEvents* makeKeyEvents();
+
+bool writeInputQueue(const char* filename) {
+    auto node = InputQueue::Instance.rawNodeBegin();
+
+    ofstream file(filename);
+    if (file.is_open()) {
+        while (node != NULL) {
+            file << (node->vkCode) << endl;
+            if (node->vkCode == UP) file << "*";
+
+            node = node->next;
+        }
+
+        file.close();
+        return true;
+    }
+    else {
+        return false;
+    }
+}
 
 void stopMacro() {
     stopKeyHook();
@@ -59,12 +83,14 @@ MagicFnEvents* makeKeyEvents() {
     magicFnEvents->setPressAndReleaseEvent('F', &EventDownWithCtrl, &EventUpWithCtrl);
 
     magicFnEvents->pressEvents['Q'] = KeyEventLambda(p) {
-        InputQueue::Instance.push(VK_LCONTROL, DOWN);
-        return 1;
+        p->vkCode = VK_LCONTROL;
+        //InputQueue::Instance.push(VK_LCONTROL, DOWN);
+        return 0;
     };
     magicFnEvents->releaseEvents['Q'] = KeyEventLambda(p) {
-        InputQueue::Instance.push(VK_LCONTROL, UP);
-        return 1;
+        p->vkCode = VK_LCONTROL;
+        //InputQueue::Instance.push(VK_LCONTROL, UP);
+        return 0;
     };
     magicFnEvents->pressEvents['W'] = KeyEventLambda(p) {
         InputQueue::Instance.push(VK_LSHIFT, DOWN);

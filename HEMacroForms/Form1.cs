@@ -1,3 +1,5 @@
+using System.Diagnostics;
+
 namespace HEMacroForms
 {
     public partial class Form1 : Form
@@ -24,7 +26,16 @@ namespace HEMacroForms
 
         private void DebugMenuItem_Click(object sender, EventArgs e)
         {
-
+            var now = DateTime.Now;
+            var filename = $"queuelog_{now:yyyyMdHHmmss}.txt";
+            if (HEMacro.writeInputQueue(filename))
+            {
+                Process.Start("notepad.exe", filename);
+            }
+            else
+            {
+                MessageBox.Show($"couldn't open '{filename}'");
+            }
         }
 
         private void ExitMenuItem_Click(object sender, EventArgs e)
