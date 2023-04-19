@@ -1,4 +1,3 @@
-#include "pch.h"
 #include "KeyHook.h"
 #include <stdlib.h>
 

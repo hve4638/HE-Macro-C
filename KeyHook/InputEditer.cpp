@@ -1,5 +1,4 @@
 #include "KeyHook.h"
-#include "pch.h"
 
 namespace KeyHook {
     namespace InputEditer {

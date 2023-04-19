@@ -1,4 +1,5 @@
 #include "pch.h"
+#include <iostream>
 #include <fstream>
 #include <string>
 #include <windows.h>
@@ -81,6 +82,13 @@ MagicFnEvents* makeKeyEvents() {
     magicFnEvents->setPressAndReleaseEvent('S', &EventDownWithCtrl, &EventUpWithCtrl);
     magicFnEvents->setPressAndReleaseEvent('D', &EventDownWithCtrl, &EventUpWithCtrl);
     magicFnEvents->setPressAndReleaseEvent('F', &EventDownWithCtrl, &EventUpWithCtrl);
+
+    magicFnEvents->onMagicFnEnabled = Invoker{
+    };
+    magicFnEvents->onMagicFnDisabled = Invoker{
+        InputQueue::Instance.push(VK_LSHIFT, UP);
+        InputQueue::Instance.push(VK_LCONTROL, UP);
+    };
 
     magicFnEvents->pressEvents['Q'] = KeyEventLambda(p) {
         p->vkCode = VK_LCONTROL;

@@ -1,4 +1,3 @@
-#include "pch.h"
 #include "KeyHook.h"
 
 namespace KeyHook {
@@ -23,8 +22,14 @@ namespace KeyHook {
                 }
             }
             if (p->vkCode == VK_CAPITAL) {
-                if (wParam == WM_KEYDOWN) m_magicFnEnabled = true;
-                else if (wParam == WM_KEYUP) m_magicFnEnabled = false;
+                if (wParam == WM_KEYDOWN) {
+                    m_magicFnEnabled = true;
+                    m_keyListener->onMagicFnChanged(true);
+                }
+                else if (wParam == WM_KEYUP) {
+                    m_magicFnEnabled = false;
+                    m_keyListener->onMagicFnChanged(false);
+                }
 
                 return 1;
             }
