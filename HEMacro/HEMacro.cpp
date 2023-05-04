@@ -91,14 +91,14 @@ MagicFnEvents* makeKeyEvents() {
     };
 
     magicFnEvents->pressEvents['Q'] = KeyEventLambda(p) {
-        p->vkCode = VK_LCONTROL;
-        //InputQueue::Instance.push(VK_LCONTROL, DOWN);
-        return 0;
+        //p->vkCode = VK_LCONTROL;
+        InputQueue::Instance.push(VK_LCONTROL, DOWN);
+        return 1;
     };
     magicFnEvents->releaseEvents['Q'] = KeyEventLambda(p) {
-        p->vkCode = VK_LCONTROL;
-        //InputQueue::Instance.push(VK_LCONTROL, UP);
-        return 0;
+        //p->vkCode = VK_LCONTROL;
+        InputQueue::Instance.push(VK_LCONTROL, UP);
+        return 1;
     };
     magicFnEvents->pressEvents['W'] = KeyEventLambda(p) {
         InputQueue::Instance.push(VK_LSHIFT, DOWN);
