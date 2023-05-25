@@ -37,11 +37,11 @@ namespace KeyHook {
             if (!m_magicFnEnabled) goto normalExit;
 
             if (wParam == WM_KEYDOWN) {
-                LRESULT result = m_keyListener->pressing(p);
+                LRESULT result = m_keyListener->onPressing(p);
                 if (result == 1) goto keyBlocked;
             }
             else if (wParam == WM_KEYUP) {
-                LRESULT result = m_keyListener->releasing(p);
+                LRESULT result = m_keyListener->onReleasing(p);
                 if (result == 1) goto keyBlocked;
             }
         }

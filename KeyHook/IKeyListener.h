@@ -4,8 +4,8 @@
 namespace KeyHook {
     class KEYHOOK_API IKeyListener {
     public:
-        virtual void onMagicFnChanged(bool) = 0;
-        virtual LRESULT pressing(PKBDLLHOOKSTRUCT&) = 0;
-        virtual LRESULT releasing(PKBDLLHOOKSTRUCT&) = 0;
+        virtual void onMagicFnChanged(bool)=0;
+        virtual LRESULT onPressing(PKBDLLHOOKSTRUCT&)=0;
+        virtual LRESULT onReleasing(PKBDLLHOOKSTRUCT&)=0;
     };
 }

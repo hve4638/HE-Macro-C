@@ -13,6 +13,18 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="헤더 파일\Exports">
+      <UniqueIdentifier>{45333989-c03a-4d8b-900d-71a1c5986644}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\IKeyListeners">
+      <UniqueIdentifier>{c756853b-b2fb-4d0b-93e9-66efc0e64cc9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\Logger">
+      <UniqueIdentifier>{3c0f7419-4933-4ebd-bd80-bc67d878eed6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Logger">
+      <UniqueIdentifier>{60f37dc2-78b8-47d3-bb86-c63acd707b55}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -27,9 +39,6 @@
     <ClInclude Include="MagicFnEvents.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="IKeyListener.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="InputQueue.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
@@ -39,8 +48,20 @@
     <ClInclude Include="KeyHooker.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="IKeyListener.h">
+      <Filter>헤더 파일\IKeyListeners</Filter>
+    </ClInclude>
     <ClInclude Include="KeyListener.h">
-      <Filter>헤더 파일</Filter>
+      <Filter>헤더 파일\IKeyListeners</Filter>
+    </ClInclude>
+    <ClInclude Include="ILogger.h">
+      <Filter>헤더 파일\Logger</Filter>
+    </ClInclude>
+    <ClInclude Include="Logger.h">
+      <Filter>헤더 파일\Logger</Filter>
+    </ClInclude>
+    <ClInclude Include="ILogInfo.h">
+      <Filter>헤더 파일\Logger</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -64,6 +85,12 @@
     </ClCompile>
     <ClCompile Include="KeyHooker.cpp">
       <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Logger.cpp">
+      <Filter>소스 파일\Logger</Filter>
+    </ClCompile>
+    <ClCompile Include="CodeLogInfo.cpp">
+      <Filter>소스 파일\Logger</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

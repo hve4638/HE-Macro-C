@@ -10,7 +10,7 @@ namespace KeyHook {
         void setMagicFnEvents(MagicFnEvents*);
 
         void onMagicFnChanged(bool) override;
-        LRESULT pressing(PKBDLLHOOKSTRUCT&) override;
-        LRESULT releasing(PKBDLLHOOKSTRUCT&) override;
+        LRESULT onPressing(PKBDLLHOOKSTRUCT&) override;
+        LRESULT onReleasing(PKBDLLHOOKSTRUCT&) override;
     };
 }

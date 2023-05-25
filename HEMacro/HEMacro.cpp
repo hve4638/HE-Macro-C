@@ -78,10 +78,6 @@ MagicFnEvents* makeKeyEvents() {
     magicFnEvents->setPressAndReleaseEvent('C', &EventDownWithCtrl, &EventUpWithCtrl);
     magicFnEvents->setPressAndReleaseEvent('V', &EventDownWithCtrl, &EventUpWithCtrl);
     magicFnEvents->setPressAndReleaseEvent('B', &EventDownWithCtrl, &EventUpWithCtrl);
-    magicFnEvents->setPressAndReleaseEvent('A', &EventDownWithCtrl, &EventUpWithCtrl);
-    magicFnEvents->setPressAndReleaseEvent('S', &EventDownWithCtrl, &EventUpWithCtrl);
-    magicFnEvents->setPressAndReleaseEvent('D', &EventDownWithCtrl, &EventUpWithCtrl);
-    magicFnEvents->setPressAndReleaseEvent('F', &EventDownWithCtrl, &EventUpWithCtrl);
 
     magicFnEvents->onMagicFnEnabled = Invoker{
     };
@@ -89,7 +85,27 @@ MagicFnEvents* makeKeyEvents() {
         InputQueue::Instance.push(VK_LSHIFT, UP);
         InputQueue::Instance.push(VK_LCONTROL, UP);
     };
+    //magicFnEvents->setPressAndReleaseEvent('A', &EventDownWithCtrl, &EventUpWithCtrl);
+    //magicFnEvents->setPressAndReleaseEvent('D', &EventDownWithCtrl, &EventUpWithCtrl);
 
+    magicFnEvents->pressEvents[VK_OEM_COMMA] = KeyEventLambda(p) {
+        InputQueue::Instance.push(VK_LCONTROL, DOWN);
+        InputQueue::Instance.push(VK_LWIN, DOWN);
+        InputQueue::Instance.push(VK_LEFT, DOWN);
+        InputQueue::Instance.push(VK_LEFT, UP);
+        InputQueue::Instance.push(VK_LWIN, UP);
+        InputQueue::Instance.push(VK_LCONTROL, UP);
+        return 1;
+    };
+    magicFnEvents->pressEvents[VK_OEM_PERIOD] = KeyEventLambda(p) {
+        InputQueue::Instance.push(VK_LCONTROL, DOWN);
+        InputQueue::Instance.push(VK_LWIN, DOWN);
+        InputQueue::Instance.push(VK_RIGHT, DOWN);
+        InputQueue::Instance.push(VK_RIGHT, UP);
+        InputQueue::Instance.push(VK_LWIN, UP);
+        InputQueue::Instance.push(VK_LCONTROL, UP);
+        return 1;
+    };
     magicFnEvents->pressEvents['Q'] = KeyEventLambda(p) {
         //p->vkCode = VK_LCONTROL;
         InputQueue::Instance.push(VK_LCONTROL, DOWN);
@@ -102,6 +118,7 @@ MagicFnEvents* makeKeyEvents() {
     };
     magicFnEvents->pressEvents['W'] = KeyEventLambda(p) {
         InputQueue::Instance.push(VK_LSHIFT, DOWN);
+
         return 1;
     };
     magicFnEvents->releaseEvents['W'] = KeyEventLambda(p) {
@@ -110,6 +127,11 @@ MagicFnEvents* makeKeyEvents() {
     };
 
     magicFnEvents->hotkey['E'] = VK_CAPITAL;
+
+    magicFnEvents->hotkey['A'] = VK_LEFT;
+    magicFnEvents->hotkey['D'] = VK_RIGHT;
+    magicFnEvents->hotkey['S'] = VK_DOWN;
+    magicFnEvents->hotkey['F'] = VK_UP;
 
     magicFnEvents->hotkey['I'] = VK_UP;
     magicFnEvents->hotkey['J'] = VK_LEFT;

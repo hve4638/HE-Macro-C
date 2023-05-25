@@ -143,21 +143,26 @@
   <ItemGroup>
     <ClInclude Include="framework.h" />
     <ClInclude Include="IKeyListener.h" />
+    <ClInclude Include="ILogger.h" />
+    <ClInclude Include="ILogInfo.h" />
     <ClInclude Include="InputEditer.h" />
     <ClInclude Include="InputQueue.h" />
     <ClInclude Include="KeyHook.h" />
     <ClInclude Include="KeyHooker.h" />
     <ClInclude Include="KeyListener.h" />
+    <ClInclude Include="Logger.h" />
     <ClInclude Include="MagicFnEvents.h" />
     <ClInclude Include="typedef.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CKeyHook.cpp" />
+    <ClCompile Include="CodeLogInfo.cpp" />
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="InputEditer.cpp" />
     <ClCompile Include="InputQueue.cpp" />
     <ClCompile Include="KeyHooker.cpp" />
     <ClCompile Include="KeyListener.cpp" />
+    <ClCompile Include="Logger.cpp" />
     <ClCompile Include="MagicFnEvents.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

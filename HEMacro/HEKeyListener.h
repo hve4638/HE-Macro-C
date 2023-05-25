@@ -5,7 +5,7 @@
 namespace KeyHook {
 	class HEKeyListener : public KeyListener {
     public:
-        LRESULT pressing(PKBDLLHOOKSTRUCT&) override;
-        LRESULT releasing(PKBDLLHOOKSTRUCT&) override;
+        LRESULT onPressing(PKBDLLHOOKSTRUCT&) override;
+        LRESULT onReleasing(PKBDLLHOOKSTRUCT&) override;
     };
 }
