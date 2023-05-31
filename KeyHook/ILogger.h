@@ -2,12 +2,6 @@
 #include "ILogInfo.h"
 
 namespace LogUtils {
-    enum ErrorLogExtraInfo {
-        ERRLOG_EXTRA_NONE = 0x0,
-        ERRLOG_EXTRA_FUNCTION = 0x1,
-        ERRLOG_EXTRA_FULL = 0xFFFFFF
-    };
-
     enum class LogLevel {
         DISABLE = 0x0,
         ALL = 0x1,
@@ -30,6 +24,6 @@ namespace LogUtils {
         virtual ILogger& operator<<(const char*) abstract;
         virtual ILogger& operator<<(LogLevel) abstract;
         virtual ILogger& operator<<(LogDirection) abstract;
-        virtual ILogger& operator<<(CodeLogInfo*) abstract;
+        virtual ILogger& operator<<(ILogInfo*) abstract;
     };
 }

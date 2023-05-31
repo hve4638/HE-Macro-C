@@ -13,7 +13,7 @@
 using namespace std;
 using namespace KeyHook;
 
-MagicFnEvents* makeKeyEvents();
+MagicFnEventsClass* makeKeyEvents();
 
 bool writeInputQueue(const char* filename) {
     auto node = InputQueue::Instance.rawNodeBegin();
@@ -42,7 +42,7 @@ void stopMacro() {
 void runMacroDebug() {
     KeyHooker hooker;
     KeyListener* listener = new HEKeyListener();
-    MagicFnEvents* magicFnEvents = makeKeyEvents();
+    MagicFnEventsClass* magicFnEvents = makeKeyEvents();
 
     listener->setMagicFnEvents(magicFnEvents);
     hooker.setKeyListener(listener);
@@ -54,7 +54,7 @@ void runMacroDebug() {
 void runMacro() {
     KeyHooker hooker;
     KeyListener* listener = new KeyListener();
-    MagicFnEvents* magicFnEvents = makeKeyEvents();
+    MagicFnEventsClass* magicFnEvents = makeKeyEvents();
 
     listener->setMagicFnEvents(magicFnEvents);
     hooker.setKeyListener(listener);
@@ -70,8 +70,8 @@ void clearInputQueue() {
     }   
 }
 
-MagicFnEvents* makeKeyEvents() {
-    MagicFnEvents *magicFnEvents = new MagicFnEvents();
+MagicFnEventsClass* makeKeyEvents() {
+    MagicFnEventsClass *magicFnEvents = new MagicFnEventsClass();
 
     magicFnEvents->setPressAndReleaseEvent('Z', &EventDownWithCtrl, &EventUpWithCtrl);
     magicFnEvents->setPressAndReleaseEvent('X', &EventDownWithCtrl, &EventUpWithCtrl);

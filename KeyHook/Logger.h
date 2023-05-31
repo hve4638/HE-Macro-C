@@ -7,9 +7,9 @@ using namespace std;
 
 namespace LogUtils {
     class Logger : public ILogger {
-        LogLevel m_logLevel = LogLevel::ALL;
         LogDirection m_logDirection = LogDirection::CONSOLE;
-        LogLevel m_currentLogLevel = LogLevel::ALL;
+        LogLevel m_logLevel = LogLevel::ALL;
+        LogLevel m_writeLevel = LogLevel::ALL;
 
         bool enabled();
         void write(const string&);
@@ -26,7 +26,7 @@ namespace LogUtils {
         ILogger& operator<<(const char*) override;
         ILogger& operator<<(LogLevel) override;
         ILogger& operator<<(LogDirection) override;
-        //ILogger& operator<<(const L&) override;
+        ILogger& operator<<(ILogInfo*) override;
     };
 }
 

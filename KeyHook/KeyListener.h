@@ -5,9 +5,9 @@
 
 namespace KeyHook {
     class KEYHOOK_API KeyListener : public IKeyListener {
-        MagicFnEvents* m_magicFnEvents = NULL;
+        MagicFnEventsClass* m_magicFnEvents = NULL;
     public:
-        void setMagicFnEvents(MagicFnEvents*);
+        void setMagicFnEvents(MagicFnEventsClass*);
 
         void onMagicFnChanged(bool) override;
         LRESULT onPressing(PKBDLLHOOKSTRUCT&) override;

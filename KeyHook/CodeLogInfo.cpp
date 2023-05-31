@@ -1,15 +1,22 @@
 #include "typedef.h"
-#include "ILogInfo.h"
+#include "CodeLogInfo.h"
+#include <format>
 
 namespace LogUtils {
-    class CodeLogInfo : ILogInfo {
-        std::string message = "";
-        DWORD errorCode = GetLastError();
-        const char* funcName;
-        const int funcLine;
+	CodeLogInfo::CodeLogInfo(std::string message, DWORD errorCode, const char* __fname, const int __fline) {
+		m_message = message;
+		m_errorCode = errorCode;
+		m_fname = __fname;
+		m_fline = __fline;
+	}
 
-    public:
-        CodeLogInfo(std::string message, DWORD errorCode, const char* __fname, const int __fline);
-        std::string message() = 0;
-    };
+	std::string CodeLogInfo::message() {
+		return std::format("Function = {:s}({:d}), Code = 0x{:x}({:d}), Msg = {:s}",
+			m_fname,
+			m_fline,
+			m_errorCode,
+			m_errorCode,
+			m_message
+		);
+	}
 }

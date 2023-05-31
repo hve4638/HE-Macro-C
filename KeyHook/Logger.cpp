@@ -1,5 +1,9 @@
+#include <iostream>
 #include <format>
+#include "typedef.h"
 #include "Logger.h"
+
+using namespace std;
 
 namespace LogUtils {
     Logger::Logger(LogLevel logLevel) {
@@ -25,72 +29,51 @@ namespace LogUtils {
     }
 
     bool Logger::enabled() {
-        return (m_currentLogLevel >= m_logLevel);
+        return (m_writeLevel >= m_logLevel);
     }
 
     void Logger::write(const string& message) {
         if (m_logDirection == LogDirection::DEBUGVIEW) {
-            OutputDebugStringT(message.c_str());
+
         }
         else if (m_logDirection == LogDirection::CONSOLE) {
-            tcout << message;
+            cout << message;
         }
     };
 
     void Logger::writeln(const string& message) {
         write(message);
         if (m_logDirection == LogDirection::DEBUGVIEW) {
-            OutputDebugStringT(_T("\n"));
+
         }
         else if (m_logDirection == LogDirection::CONSOLE) {
-            tcout << endl;
+            cout << endl;
         }
     }
 
-    ILogger& Logger::operator<<(const tstring& message) {
+    ILogger& Logger::operator<<(const string& message) {
         if (enabled()) {
             write(message);
         }
         return *this;
     }
 
-    ILogger& Logger::operator<<(const TCHAR* message) {
+    ILogger& Logger::operator<<(const char* message) {
         if (enabled()) {
-            write(format(_T("{:s}"), message));
+            write(format("{:s}", message));
         }
         return *this;
     }
 
-    ILogger& Logger::operator<<(const ErrorLogInfo& info) {
+    ILogger& Logger::operator<<(ILogInfo* info) {
         if (enabled()) {
-            if (info.extraInfo & ERRLOG_EXTRA_FUNCTION) {
-                string funcName = info.funcName;
-                tstring funcNameT = tstring().assign(funcName.begin(), funcName.end());
-                write(
-                    format(_T("Function = {:s}({:d}), Code = 0x{:x}({:d}), Msg = {:s}"),
-                        funcNameT,
-                        info.funcLine,
-                        info.errorCode,
-                        info.errorCode,
-                        info.logMessage
-                    )
-                );
-            }
-            else {
-                write(
-                    format(_T("Code = 0x{:x}({:d}), Msg = {:s}"),
-                        info.errorCode,
-                        info.errorCode,
-                        info.logMessage
-                    )
-                );
-            }
+            write(info->message());
         }
         return *this;
     }
 
     ILogger& Logger::operator<<(LogLevel logLevel) {
-        m_currentLogLevel = logLevel;
+        m_writeLevel = logLevel;
         return *this;
     }
 
@@ -98,11 +81,5 @@ namespace LogUtils {
     ILogger& Logger::operator<<(LogDirection logDirection) {
         m_logDirection = logDirection;
         return *this;
-    }
-
-    void Logger::log(const TCHAR* logMessage, DWORD errorCode, LogLevel logLevel) {
-        *this << logLevel;
-        *this << ErrorLogInfo(logMessage, errorCode);
-        *this << NL;
     }
 }

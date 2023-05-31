@@ -30,9 +30,6 @@
     <ClInclude Include="framework.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="KeyHook.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="typedef.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
@@ -43,9 +40,6 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="InputEditer.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="KeyHooker.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="IKeyListener.h">
@@ -62,6 +56,18 @@
     </ClInclude>
     <ClInclude Include="ILogInfo.h">
       <Filter>헤더 파일\Logger</Filter>
+    </ClInclude>
+    <ClInclude Include="KeyHook.h">
+      <Filter>헤더 파일\Exports</Filter>
+    </ClInclude>
+    <ClInclude Include="KeyHooker.h">
+      <Filter>헤더 파일\Exports</Filter>
+    </ClInclude>
+    <ClInclude Include="CodeLogInfo.h">
+      <Filter>헤더 파일\Logger</Filter>
+    </ClInclude>
+    <ClInclude Include="KeyController.h">
+      <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -91,6 +97,9 @@
     </ClCompile>
     <ClCompile Include="CodeLogInfo.cpp">
       <Filter>소스 파일\Logger</Filter>
+    </ClCompile>
+    <ClCompile Include="KeyController.cpp">
+      <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

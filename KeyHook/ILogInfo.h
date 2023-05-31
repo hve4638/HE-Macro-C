@@ -3,6 +3,7 @@
 
 namespace LogUtils {
     struct ILogInfo {
+        ~ILogInfo() {}
         virtual std::string message() = 0;
     };
 }

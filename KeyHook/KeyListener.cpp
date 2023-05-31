@@ -1,7 +1,7 @@
 #include "KeyHook.h"
 
 namespace KeyHook {
-    void KeyListener::setMagicFnEvents(MagicFnEvents* magicFnEvents) {
+    void KeyListener::setMagicFnEvents(MagicFnEventsClass* magicFnEvents) {
         m_magicFnEvents = magicFnEvents;
     }
 
