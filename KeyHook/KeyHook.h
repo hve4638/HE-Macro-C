@@ -1,11 +1,7 @@
 #pragma once
-#include "typedef.h"
-#include "KeyHooker.h"
-#include "KeyListener.h"
-#include "MagicFnEvents.h"
-#include "InputQueue.h"
+#include "api.h"
+#include "KeyHook/IKeyHooker.h"
 
-namespace KeyHook {
-    extern "C" KEYHOOK_API void runKeyHook(KeyHooker*);
-    extern "C" KEYHOOK_API void stopKeyHook();
-}
+extern "C" KEYHOOK_API int testKeyHook();
+extern "C" KEYHOOK_API int runKeyHook(IKeyListener*);
+extern "C" KEYHOOK_API void stopKeyHook();

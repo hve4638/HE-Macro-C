@@ -13,38 +13,59 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="헤더 파일\Export">
+      <UniqueIdentifier>{0a4c6980-0dc0-444e-b009-a97c21fc6da4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\Loader">
+      <UniqueIdentifier>{330d0add-4c1b-462e-b2cf-70d041cc7a25}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\KeyMacro">
+      <UniqueIdentifier>{6e33cb39-78ea-4f2b-b79d-126d5a14c1b7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="pch.h">
+    <ClInclude Include="DebugKeyListener.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="KeyEvents.h">
-      <Filter>헤더 파일</Filter>
+    <ClInclude Include="api.h">
+      <Filter>헤더 파일\Export</Filter>
     </ClInclude>
     <ClInclude Include="HEMacro.h">
+      <Filter>헤더 파일\Export</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SharedCode\KeyHook\KeyHookLoader.h">
+      <Filter>헤더 파일\Loader</Filter>
+    </ClInclude>
+    <ClInclude Include="KeyListener.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="HEKeyListener.h">
+    <ClInclude Include="MagicFnMacro.h">
       <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="KeyMacro.h">
+      <Filter>헤더 파일\KeyMacro</Filter>
+    </ClInclude>
+    <ClInclude Include="IKeyMacro.h">
+      <Filter>헤더 파일\KeyMacro</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="pch.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="KeyEvents.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="HEMacro.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="HEKeyListener.cpp">
+    <ClCompile Include="..\SharedCode\KeyHook\KeyHookLoader.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="KeyListener.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="KeyMacro.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

@@ -1,5 +1,6 @@
 #pragma once
 #include <windows.h>
+#include <memory>
 #include <functional>
 
 #define MAGICFN_RANGE 256
@@ -14,3 +15,8 @@ typedef void(*OnInvoke)();
 
 typedef std::function<void()> Action;
 typedef std::function<void(bool)> BoolAction;
+
+enum InputNodeFlags {
+    DOWN,
+    UP,
+};

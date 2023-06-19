@@ -13,33 +13,45 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="헤더 파일\Export">
+      <UniqueIdentifier>{dca97c51-63af-4fdd-8e06-7b78642cc17d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\KeyHooker">
+      <UniqueIdentifier>{8dbe4f27-ed84-4801-87cf-8497873214dd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\Shared">
+      <UniqueIdentifier>{4e909edd-d7d3-4247-8f98-60523127926d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="api.h">
+      <Filter>헤더 파일\Export</Filter>
+    </ClInclude>
     <ClInclude Include="KeyHook.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="typedef.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="MagicFnEvents.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="IKeyListener.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="InputQueue.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="InputEditer.h">
-      <Filter>헤더 파일</Filter>
+      <Filter>헤더 파일\Export</Filter>
     </ClInclude>
     <ClInclude Include="KeyHooker.h">
-      <Filter>헤더 파일</Filter>
+      <Filter>헤더 파일\KeyHooker</Filter>
     </ClInclude>
-    <ClInclude Include="KeyListener.h">
+    <ClInclude Include="..\SharedCode\KeyHook\IKeyListener.h">
+      <Filter>헤더 파일\Shared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SharedCode\KeyHook\IKeyHooker.h">
+      <Filter>헤더 파일\Shared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SharedCode\KeyHook\IKeyQueue.h">
+      <Filter>헤더 파일\Shared</Filter>
+    </ClInclude>
+    <ClInclude Include="typedef.h">
+      <Filter>헤더 파일\Shared</Filter>
+    </ClInclude>
+    <ClInclude Include="KeyQueue.h">
+      <Filter>헤더 파일\KeyHooker</Filter>
+    </ClInclude>
+    <ClInclude Include="ReserveCall.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
@@ -47,22 +59,16 @@
     <ClCompile Include="dllmain.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="KeyListener.cpp">
+    <ClCompile Include="KeyQueue.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="MagicFnEvents.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="CKeyHook.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="InputEditer.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="InputQueue.cpp">
+    <ClCompile Include="KeyHook.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="KeyHooker.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="ReserveCall.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
