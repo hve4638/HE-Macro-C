@@ -20,6 +20,7 @@ int runMacro() {
 
 	KeyListener keyListener;
 	keyListener.setMagicFnEvents(&macro);
+    /*
 	macro.onMagicFnEnabled = [](IKeyMacro& macro) {
 		cout << "enabled?" << endl;
 	};
@@ -29,7 +30,7 @@ int runMacro() {
 	macro.onPressing['A'] = [](KHStruct kh, IKeyMacro& macro)->MacroKeyResult {
 		macro.click(VK_LEFT);
 		return MacroKeyResult::BLOCK;
-	};
+	};*/
 
 	loader.runKeyHook(&keyListener);
 
@@ -59,6 +60,22 @@ static void setMacro(MagicFnMacro& magicFnMacro) {
     };
     magicFnMacro.onPressing['B'] = KeyMacroLambda(kh, macro) {
         macro.downCtrl().click('B').upCtrl();
+        return MacroKeyResult::BLOCK;
+    };
+    magicFnMacro.onPressing['A'] = KeyMacroLambda(kh, macro) {
+        macro.downCtrl().click('A').upCtrl();
+        return MacroKeyResult::BLOCK;
+    };
+    magicFnMacro.onPressing['S'] = KeyMacroLambda(kh, macro) {
+        macro.downCtrl().click('S').upCtrl();
+        return MacroKeyResult::BLOCK;
+    };
+    magicFnMacro.onPressing['D'] = KeyMacroLambda(kh, macro) {
+        macro.downCtrl().click('D').upCtrl();
+        return MacroKeyResult::BLOCK;
+    };
+    magicFnMacro.onPressing['F'] = KeyMacroLambda(kh, macro) {
+        macro.downCtrl().click('F').upCtrl();
         return MacroKeyResult::BLOCK;
     };
 
@@ -101,28 +118,28 @@ static void setMacro(MagicFnMacro& magicFnMacro) {
 
 
     magicFnMacro.hotkey['E'] = VK_CAPITAL;
-    magicFnMacro.hotkey['A'] = VK_LEFT;
-    magicFnMacro.hotkey['D'] = VK_RIGHT;
-    magicFnMacro.hotkey['S'] = VK_DOWN;
-    magicFnMacro.hotkey['F'] = VK_UP;
+    //magicFnMacro.hotkey['A'] = VK_LEFT;
+    //magicFnMacro.hotkey['D'] = VK_RIGHT;
+    //magicFnMacro.hotkey['S'] = VK_DOWN;
+    //magicFnMacro.hotkey['F'] = VK_UP;
 
     magicFnMacro.hotkey['I'] = VK_UP;
     magicFnMacro.hotkey['J'] = VK_LEFT;
     magicFnMacro.hotkey['K'] = VK_DOWN;
     magicFnMacro.hotkey['L'] = VK_RIGHT;
 
-    magicFnMacro.hotkey['1'] = VK_F1;
-    magicFnMacro.hotkey['2'] = VK_F2;
-    magicFnMacro.hotkey['3'] = VK_F3;
-    magicFnMacro.hotkey['4'] = VK_F4;
-    magicFnMacro.hotkey['5'] = VK_F5;
-    magicFnMacro.hotkey['6'] = VK_F6;
-    magicFnMacro.hotkey['7'] = VK_F7;
-    magicFnMacro.hotkey['8'] = VK_F8;
-    magicFnMacro.hotkey['9'] = VK_F9;
-    magicFnMacro.hotkey['0'] = VK_F10;
-    magicFnMacro.hotkey[189] = VK_F11; // '-'
-    magicFnMacro.hotkey[187] = VK_F12; // '='
+    magicFnMacro.hotkey['1'] = VK_F13;
+    magicFnMacro.hotkey['2'] = VK_F14;
+    magicFnMacro.hotkey['3'] = VK_F15;
+    magicFnMacro.hotkey['4'] = VK_F16;
+    magicFnMacro.hotkey['5'] = VK_F17;
+    magicFnMacro.hotkey['6'] = VK_F18;
+    magicFnMacro.hotkey['7'] = VK_F19;
+    magicFnMacro.hotkey['8'] = VK_F20;
+    magicFnMacro.hotkey['9'] = VK_F21;
+    magicFnMacro.hotkey['0'] = VK_F22;
+    magicFnMacro.hotkey[189] = VK_F23; // '-'lllkkk
+    magicFnMacro.hotkey[187] = VK_F24; // '='
 
     magicFnMacro.hotkey[0xDB] = VK_PGUP; // '['
     magicFnMacro.hotkey[0xDD] = VK_PGDOWN; // ']'

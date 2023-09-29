@@ -21,6 +21,7 @@ LRESULT CALLBACK hookProc(int nCode, WPARAM wParam, LPARAM lParam) {
 
     return CurrentRunningHooker->onHook(info, *CurrentInputQueue);
 }
+
 class Hooker {
     KeyHooker m_hooker;
     KeyQueue m_queue;

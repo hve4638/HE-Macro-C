@@ -7,6 +7,6 @@ int main()
 {
 	HEMacroLoader heMacro = { "./HEMacro.dll" };
 	heMacro.load();
-
+	
 	cout << heMacro.runMacro() << endl;
 }
