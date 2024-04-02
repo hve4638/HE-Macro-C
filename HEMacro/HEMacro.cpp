@@ -1,156 +1,78 @@
-#include "KeyHook/KeyHookLoader.h"
-#include "HEMacro.h"
-#include "KeyListener.h"
 #include <iostream>
+#include <windows.h>
+#include "KeyHook/KeyHookLoader.h"
+#include "KeyHooker.h"
+#include "HEMacro.h"
+#include "MacroInitializer.h"
+#include "KeyListener.h"
 
-#define VK_PGUP 33
-#define VK_PGDOWN 34
+//#define VK_PGUP 33
+//#define VK_PGDOWN 34
 using namespace std;
 
 static KeyHookLoader loader = { "./KeyHook.dll" };
-static MagicFnMacro macro;
 
-void setMacro(MagicFnMacro& magicFnMacro);
-int runMacro() {
-	if (!loader.isProcLoaded()) {
-		loader.load();
+// MagicFnMacro의 크기는 3만 바이트를 넘어감
+// 스택영역에 넣는것은 부적절하므로 전역 선언
+static MagicFnMacroConfiguration macro;
+static KeyListener* currentKeyListener = NULL;
+
+static void loadcheck();
+
+void clearInputQueue() {
+	if (currentKeyListener == NULL) return;
+
+	currentKeyListener->clearQueue();
+}
+
+int writeQueueLog(const char* filename) {
+	return 15;
+	if (currentKeyListener == NULL) return -2;
+	
+	if (currentKeyListener->writeQueueLog(filename)) {
+		return 0;
 	}
+	else {
+		return -1;
+	}
+}
 
-    setMacro(macro);
+int runMacro() {                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+	if (!loader.isProcLoaded()) loader.load();
+    if (loader.isKeyHookRunning()) return -1;
 
-	KeyListener keyListener;
-	keyListener.setMagicFnEvents(&macro);
-    /*
-	macro.onMagicFnEnabled = [](IKeyMacro& macro) {
-		cout << "enabled?" << endl;
-	};
-	macro.onMagicFnDisabled = [](IKeyMacro& macro) {
-		cout << "disabled??" << endl;
-	};
-	macro.onPressing['A'] = [](KHStruct kh, IKeyMacro& macro)->MacroKeyResult {
-		macro.click(VK_LEFT);
-		return MacroKeyResult::BLOCK;
-	};*/
+    initializeMacroToDefaults(macro);
 
-	loader.runKeyHook(&keyListener);
+	KeyListener keyListener = { macro };
 
-	return loader.testKeyHook();
+	// TODO : 생명주기 처리에 대한 더 나은 방법 필요
+	KeyHooker keyHooker = { &keyListener };
+	loader.runKeyHook(&keyHooker);
+
+	return 0;
 }
 
 void stopMacro() {
+	if (!loader.isProcLoaded()) loader.load();
+
+	cerr << "StopMacro()" << endl;
+	loader.stopKeyHook();
+	while (loader.isKeyHookRunning()) {
+		Sleep(1);
+	}
 	return;
 }
 
-static void setMacro(MagicFnMacro& magicFnMacro) {
-    magicFnMacro.onPressing['Z'] = KeyMacroLambda(kh, macro) { 
-        macro.downCtrl().click('Z').upCtrl();
-        return MacroKeyResult::BLOCK;
-    };
-    magicFnMacro.onPressing['X'] = KeyMacroLambda(kh, macro) {
-        macro.downCtrl().click('X').upCtrl();
-        return MacroKeyResult::BLOCK;
-    };
-    magicFnMacro.onPressing['C'] = KeyMacroLambda(kh, macro) {
-        macro.downCtrl().click('C').upCtrl();
-        return MacroKeyResult::BLOCK;
-    };
-    magicFnMacro.onPressing['V'] = KeyMacroLambda(kh, macro) {
-        macro.downCtrl().click('V').upCtrl();
-        return MacroKeyResult::BLOCK;
-    };
-    magicFnMacro.onPressing['B'] = KeyMacroLambda(kh, macro) {
-        macro.downCtrl().click('B').upCtrl();
-        return MacroKeyResult::BLOCK;
-    };
-    magicFnMacro.onPressing['A'] = KeyMacroLambda(kh, macro) {
-        macro.downCtrl().click('A').upCtrl();
-        return MacroKeyResult::BLOCK;
-    };
-    magicFnMacro.onPressing['S'] = KeyMacroLambda(kh, macro) {
-        macro.downCtrl().click('S').upCtrl();
-        return MacroKeyResult::BLOCK;
-    };
-    magicFnMacro.onPressing['D'] = KeyMacroLambda(kh, macro) {
-        macro.downCtrl().click('D').upCtrl();
-        return MacroKeyResult::BLOCK;
-    };
-    magicFnMacro.onPressing['F'] = KeyMacroLambda(kh, macro) {
-        macro.downCtrl().click('F').upCtrl();
-        return MacroKeyResult::BLOCK;
-    };
+void loadcheck() {
+	if (loader.isProcLoaded()) {
+		return;
+	}
+	else if (!loader.load()) {
+		cerr << "load fail: KeyHook.dll" << endl;
+		exit(-2);
+	}
+}
 
-    magicFnMacro.onMagicFnEnabled = [](IKeyMacro& macro) { };
-    magicFnMacro.onMagicFnDisabled = [](IKeyMacro& macro) { macro.upCtrl().upShift(); };
-
-    magicFnMacro.onPressing[VK_OEM_COMMA] = KeyMacroLambda(kh, macro) { //'<'
-        macro.downCtrl().downWin();
-        macro.click(VK_LEFT);
-        macro.upCtrl().upWin();
-
-        return MacroKeyResult::BLOCK;
-    };
-    magicFnMacro.onPressing[VK_OEM_PERIOD] = KeyMacroLambda(kh, macro) { //'>'
-        macro.downCtrl().downWin();
-        macro.click(VK_RIGHT);
-        macro.upCtrl().upWin();
-
-        return MacroKeyResult::BLOCK;
-    };
-
-    magicFnMacro.onPressing['Q'] = KeyMacroLambda(kh, macro) { 
-        macro.downCtrl();
-        return MacroKeyResult::BLOCK;
-    };
-    magicFnMacro.onReleasing['Q'] = KeyMacroLambda(kh, macro) {
-        macro.upCtrl();
-        return MacroKeyResult::BLOCK;
-    };
-    magicFnMacro.onPressing['W'] = KeyMacroLambda(kh, macro) {
-        cout << "DOWN W" << endl;
-        macro.downShift();
-        return MacroKeyResult::BLOCK;
-    };
-    magicFnMacro.onReleasing['W'] = KeyMacroLambda(kh, macro) {
-        cout << "UP W" << endl;
-        macro.upShift();
-        return MacroKeyResult::BLOCK;
-    };
-
-
-    magicFnMacro.hotkey['E'] = VK_CAPITAL;
-    //magicFnMacro.hotkey['A'] = VK_LEFT;
-    //magicFnMacro.hotkey['D'] = VK_RIGHT;
-    //magicFnMacro.hotkey['S'] = VK_DOWN;
-    //magicFnMacro.hotkey['F'] = VK_UP;
-
-    magicFnMacro.hotkey['I'] = VK_UP;
-    magicFnMacro.hotkey['J'] = VK_LEFT;
-    magicFnMacro.hotkey['K'] = VK_DOWN;
-    magicFnMacro.hotkey['L'] = VK_RIGHT;
-
-    magicFnMacro.hotkey['1'] = VK_F13;
-    magicFnMacro.hotkey['2'] = VK_F14;
-    magicFnMacro.hotkey['3'] = VK_F15;
-    magicFnMacro.hotkey['4'] = VK_F16;
-    magicFnMacro.hotkey['5'] = VK_F17;
-    magicFnMacro.hotkey['6'] = VK_F18;
-    magicFnMacro.hotkey['7'] = VK_F19;
-    magicFnMacro.hotkey['8'] = VK_F20;
-    magicFnMacro.hotkey['9'] = VK_F21;
-    magicFnMacro.hotkey['0'] = VK_F22;
-    magicFnMacro.hotkey[189] = VK_F23; // '-'lllkkk
-    magicFnMacro.hotkey[187] = VK_F24; // '='
-
-    magicFnMacro.hotkey[0xDB] = VK_PGUP; // '['
-    magicFnMacro.hotkey[0xDD] = VK_PGDOWN; // ']'
-
-    magicFnMacro.hotkey['R'] = VK_INSERT;
-
-    magicFnMacro.hotkey['U'] = VK_HOME;
-    magicFnMacro.hotkey['O'] = VK_END;
-    magicFnMacro.hotkey['N'] = VK_BACK;
-    magicFnMacro.hotkey['M'] = VK_DELETE;
-    magicFnMacro.hotkey[0xBA] = VK_RETURN; // ';' -> ENTER
-
-    magicFnMacro.hotkey['H'] = 21; // '한/영'
+const char* version() {
+	return "v1.1.0 (HEMacro)";
 }

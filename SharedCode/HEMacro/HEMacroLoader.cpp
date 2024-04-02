@@ -1,7 +1,10 @@
 #pragma once
+#include <iostream>
 #include "HEMacroLoader.h"
-#define DLL_PROC_LOAD(var_name, load_name, load_type) ((var_name = (load_type)GetProcAddress(m_module, load_name)) != NULL)
-#define DLL_PROC_CHECK(var_name, load_proc) if (var_name == NULL && !load_proc()) error()
+#define DLL_PROC_SETUP(M) BOOL dllprocloaded = TRUE; HMODULE dllmodule = M;
+#define DLL_PROC_LOAD(var_name, load_name, load_type) \
+    (dllprocloaded = dllprocloaded && ((var_name = (load_type)GetProcAddress(dllmodule, load_name)) != NULL))
+#define DLL_PROC_RESULT(LOADED) (LOADED = dllprocloaded)
 
 using namespace std;
 
@@ -18,17 +21,53 @@ HEMacroLoader::~HEMacroLoader() {
 }
 
 BOOL HEMacroLoader::load() {
-    BOOL loaded = TRUE;
-    loaded = loaded && DLL_PROC_LOAD(m_runMacro, "runMacro", RunMacroFunc);
-    loaded = loaded && DLL_PROC_LOAD(m_stopMacro, "stopMacro", StopMacroFunc);
+    if (m_module == NULL) {
+        return FALSE;
+    }
 
-    return loaded;
+    DLL_PROC_SETUP(m_module);
+    DLL_PROC_LOAD(m_runMacro, "runMacro", FuncRetInt);
+    DLL_PROC_LOAD(m_stopMacro, "stopMacro", FuncNoArg);
+    DLL_PROC_LOAD(m_writeQueueLog, "clearInputQueue", FuncArgCharRetInt);
+    DLL_PROC_LOAD(m_clearInputQueue, "writeQueueLog", FuncNoArg);
+    DLL_PROC_LOAD(m_version, "version", FuncRetChar);
+    DLL_PROC_RESULT(m_loaded);
+
+    return m_loaded;
+}
+
+void HEMacroLoader::error(string message) {
+    cerr << "KeyHookLoader: " << message << endl;
+    exit(-1);
 }
 
 int HEMacroLoader::runMacro() {
+    if (m_runMacro == NULL) error(__FUNCTION__);
+
     return m_runMacro();
 }
 
 void HEMacroLoader::stopMacro() {
+    if (m_stopMacro == NULL) error(__FUNCTION__);
+
     m_stopMacro();
 }
+
+int HEMacroLoader::writeQueueLog(const char* filename) {
+    if (m_writeQueueLog == NULL) error(__FUNCTION__);
+
+    return m_writeQueueLog(filename);
+}
+
+void HEMacroLoader::clearInputQueue() {
+    if (m_clearInputQueue == NULL) error(__FUNCTION__);
+
+    m_clearInputQueue();
+}
+
+const char* HEMacroLoader::version() {
+    if (m_version == NULL) error(__FUNCTION__);
+
+    return m_version();
+}
+

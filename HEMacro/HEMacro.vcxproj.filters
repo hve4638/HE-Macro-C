@@ -22,6 +22,12 @@
     <Filter Include="헤더 파일\KeyMacro">
       <UniqueIdentifier>{6e33cb39-78ea-4f2b-b79d-126d5a14c1b7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\Shared">
+      <UniqueIdentifier>{057dd26e-1289-437e-abd8-3352ce020360}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Hook">
+      <UniqueIdentifier>{56050fd8-6996-41ec-bb4e-1169070d440e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -51,6 +57,18 @@
     <ClInclude Include="IKeyMacro.h">
       <Filter>헤더 파일\KeyMacro</Filter>
     </ClInclude>
+    <ClInclude Include="MacroInitializer.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SharedCode\Debug\Debug.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="KeyHooker.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="KeyQueue.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -59,14 +77,23 @@
     <ClCompile Include="HEMacro.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="..\SharedCode\KeyHook\KeyHookLoader.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="KeyListener.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="KeyMacro.cpp">
       <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="MacroInitializer.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SharedCode\KeyHook\KeyHookLoader.cpp">
+      <Filter>소스 파일\Shared</Filter>
+    </ClCompile>
+    <ClCompile Include="KeyHooker.cpp">
+      <Filter>소스 파일\Hook</Filter>
+    </ClCompile>
+    <ClCompile Include="KeyListener.cpp">
+      <Filter>소스 파일\Hook</Filter>
+    </ClCompile>
+    <ClCompile Include="KeyQueue.cpp">
+      <Filter>소스 파일\Hook</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -1,7 +1,7 @@
 #pragma once
 #include <windows.h>
-#include <memory>
 #include <functional>
+#include <memory>
 
 #define MAGICFN_RANGE 256
 #define KeyEventLambda(x) [](PKBDLLHOOKSTRUCT &x) -> LRESULT

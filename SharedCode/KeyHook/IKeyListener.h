@@ -1,17 +1,17 @@
 #pragma once
 #include "typedef.h"
 #include "IKeyQueue.h"
-
-enum class MacroKeyResult {
-    PASS,
-    BLOCK
-};
+#include "KeyHook/KeyHookResult.h"
 
 interface IKeyListener {
     virtual ~IKeyListener() {}
+    
+    virtual bool isKeyLocked(DWORD vkCode) const abstract;
+
+    virtual void setKeyQueue(IKeyQueue*) abstract;
     virtual void resetKeyQueue() abstract;
-    virtual void setKeyQueue(IKeyQueue&) abstract;
+
     virtual void onMagicFnChanged(bool) abstract;
-    virtual MacroKeyResult onPressing(PKBDLLHOOKSTRUCT&, IKeyQueue&) abstract;
-    virtual MacroKeyResult onReleasing(PKBDLLHOOKSTRUCT&, IKeyQueue&) abstract;
+    virtual KeyHookResult onPressing(PKBDLLHOOKSTRUCT&, IKeyQueue&) abstract;
+    virtual KeyHookResult onReleasing(PKBDLLHOOKSTRUCT&, IKeyQueue&) abstract;
 };

@@ -147,22 +147,29 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\SharedCode\Debug\Debug.h" />
     <ClInclude Include="..\SharedCode\KeyHook\KeyHookLoader.h" />
     <ClInclude Include="api.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="HEMacro.h" />
     <ClInclude Include="DebugKeyListener.h" />
     <ClInclude Include="IKeyMacro.h" />
+    <ClInclude Include="KeyHooker.h" />
     <ClInclude Include="KeyListener.h" />
     <ClInclude Include="KeyMacro.h" />
+    <ClInclude Include="KeyQueue.h" />
+    <ClInclude Include="MacroInitializer.h" />
     <ClInclude Include="MagicFnMacro.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\SharedCode\KeyHook\KeyHookLoader.cpp" />
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="HEMacro.cpp" />
+    <ClCompile Include="KeyHooker.cpp" />
     <ClCompile Include="KeyListener.cpp" />
     <ClCompile Include="KeyMacro.cpp" />
+    <ClCompile Include="KeyQueue.cpp" />
+    <ClCompile Include="MacroInitializer.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

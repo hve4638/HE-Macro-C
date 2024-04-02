@@ -1,7 +1,8 @@
 #pragma once
-#include "typedef.h"
+#include "KeyHook/typedef.h"
 #include "KeyHook/IKeyQueue.h"
 
+// RawHooker¿¡¼­ »ç¿ëµÊ
 class KeyQueue : public IKeyQueue {
 private:
     InputQueueNode* m_firstNode = NULL;

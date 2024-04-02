@@ -4,11 +4,15 @@
 
 class KeyMacro : public IKeyMacro {
 	IKeyQueue* m_queue;
+	bool* m_keylock;
 
 public:
-	KeyMacro(IKeyQueue& queue) {
-		m_queue = &queue;
+	KeyMacro(IKeyQueue* queue, bool keylock[]) {
+		m_queue = queue;
+		m_keylock = keylock;
 	}
+	IKeyMacro& lock(WORD);
+	IKeyMacro& unlock(WORD);
 	
 	IKeyMacro& sleep(int) override;
 

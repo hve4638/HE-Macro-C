@@ -3,6 +3,9 @@
 
 interface IKeyMacro {
 	virtual ~IKeyMacro() {}
+	virtual IKeyMacro& lock(WORD) abstract;
+	virtual IKeyMacro& unlock(WORD) abstract;
+
 	virtual IKeyMacro& sleep(int) abstract;
 
 	virtual IKeyMacro& up(WORD) abstract;

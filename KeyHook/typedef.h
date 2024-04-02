@@ -1,4 +1,5 @@
 #pragma once
+/* deprecated
 #include <windows.h>
 #include <functional>
 
@@ -14,3 +15,4 @@ typedef void(*OnInvoke)();
 
 typedef std::function<void()> Action;
 typedef std::function<void(bool)> BoolAction;
+/**/

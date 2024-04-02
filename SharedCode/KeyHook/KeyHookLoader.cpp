@@ -1,7 +1,8 @@
 #include <iostream>
 #include "KeyHookLoader.h"
-#define DLL_PROC_LOAD(var_name, load_name, load_type) ((var_name = (load_type)GetProcAddress(m_module, load_name)) != NULL)
-#define DLL_PROC_CHECK(var_name, load_proc) if (var_name == NULL && !load_proc()) error()
+#define DLL_PROC_SETUP(M) BOOL dllprocloaded = TRUE; HMODULE dllmodule = M;
+#define DLL_PROC_LOAD(var_name, load_name, load_type) (dllprocloaded = ((var_name = (load_type)GetProcAddress(dllmodule, load_name)) != NULL))
+#define DLL_PROC_RESULT(LOADED) (LOADED = dllprocloaded)
 
 using namespace std;
 
@@ -16,19 +17,19 @@ KeyHookLoader::~KeyHookLoader() {
     }
 }
 
-
-void KeyHookLoader::error(string message) {
-    cout << message << endl;
-    exit(-1);
-}
-
 BOOL KeyHookLoader::load() {
-    BOOL loaded = TRUE;
-    loaded = loaded && DLL_PROC_LOAD(m_runKeyHook, "runKeyHook", RunKeyHookFunc);
-    loaded = loaded && DLL_PROC_LOAD(m_stopKeyHook, "stopKeyHook", StopKeyHookFunc);
+    if (!m_moduleLoaded) {
+        return FALSE;
+    }
 
-    m_procLoaded = loaded;
-    return loaded;
+    DLL_PROC_SETUP(m_module);
+    DLL_PROC_LOAD(m_runKeyHook, "runKeyHook", FuncRunKeyHook);
+    DLL_PROC_LOAD(m_stopKeyHook, "stopKeyHook", FuncStopKeyHook);
+    DLL_PROC_LOAD(m_isKeyHookRunning, "isKeyHookRunning", FuncIsRunningKeyHook);
+    DLL_PROC_LOAD(m_version, "version", FuncVersion);
+    DLL_PROC_RESULT(m_procLoaded);
+
+    return m_procLoaded;
 }
 
 BOOL KeyHookLoader::isLoaded() {
@@ -39,11 +40,14 @@ BOOL KeyHookLoader::isProcLoaded() {
     return m_procLoaded;
 }
 
-int KeyHookLoader::runKeyHook(IKeyListener* listener) {
-    return m_runKeyHook(listener);
+int KeyHookLoader::runKeyHook(IKeyHooker* hooker) {
+    return m_runKeyHook(hooker);
 }
 void KeyHookLoader::stopKeyHook() {
     m_stopKeyHook();
+}
+int KeyHookLoader::isKeyHookRunning() {
+    return m_isKeyHookRunning();
 }
 int KeyHookLoader::testKeyHook() {
     return -1;

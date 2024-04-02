@@ -397,6 +397,5 @@ FodyWeavers.xsd
 # JetBrains Rider
 *.sln.iml
 
-
-# Custom
-explorerfwi.bat
+.Export/
+.export/
